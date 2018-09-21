@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html>
+<head>
+    <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+    <link href="https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script>
+        YUI().use(
+            'aui-diagram-builder', 'aui-button',
+            function(Y) {
+                var availableFields = [
+                    {
+                        iconClass: 'diagram-node-start-icon',
+                        label: 'Inicio',
+                        type: 'start'
+                    },
+                    {
+                        iconClass: 'diagram-node-condition-icon',
+                        label: 'Condicional',
+                        type: 'condition'
+                    },
+                    {
+                        iconClass: 'diagram-node-task-icon',
+                        label: 'Alerta',
+                        type: 'task'
+                    },
+                    {
+                        iconClass: 'diagram-node-end-icon',
+                        label: 'Fim',
+                        type: 'end'
+                    }
+                ];
+
+                var diagramBuilder = new Y.DiagramBuilder (
+                    {
+                        availableFields: availableFields,
+                        boundingBox: '#diagram-builder-bb',
+                        render: true,
+                        srcNode: '#diagram-builder-sn'
+                    }
+                );
+
+                var btn = new Y.Button(
+                    {
+                        icon: 'icon-print',
+                        iconAlign: 'left',
+                        label: 'Carregar JSON',
+                        srcNode: '#myButton'
+                    }
+                ).render();
+
+                btn.on('click', function () {
+                   console.log(diagramBuilder.toJSON());
+                });
+            }
+        );
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="diagram-builder-bb">
+                <div id="diagram-builder-sn"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="myButton">Carregar JSON</button>
+                    <button id="processar">Processar</button>
+                </div>
+                <div id="json"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
